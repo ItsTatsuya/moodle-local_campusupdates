@@ -1,0 +1,72 @@
+{
+  "source": "json",
+  "updated": "2026-08-15",
+  "items": [
+    {
+      "id": "amazon-sde-intern",
+      "title": "Amazon SDE internship applications open for summer 2027",
+      "summary": "Roles in Bangalore, Hyderabad, and remote-first teams. Online assessment in October. Career services will run a prep session next Tuesday.",
+      "body": "Amazon has opened software-development intern roles for summer 2027. Locations include Bangalore and Hyderabad, with a few remote-first teams.\n\nThe usual path is an online assessment, then one or two interviews. Career services will host a prep session next Tuesday covering the assessment format and a sample coding prompt.\n\nThis card is demonstration content. Swap it for a live posting when the placement office publishes the real circular.",
+      "tag": "Internship",
+      "source": "Career services",
+      "url": "",
+      "published": "2026-08-14",
+      "featured": true
+    },
+    {
+      "id": "infosys-drive",
+      "title": "Infosys campus placement drive — 4 September",
+      "summary": "Eligible: 2027 batch, CGPA 6.5+, no active backlogs. Register on the placement portal by 28 August.",
+      "body": "Infosys will run an on-campus drive on 4 September. Eligibility in this demo circular is 2027 batch, CGPA 6.5 or above, and no active backlogs.\n\nRegister on the placement portal by 28 August. A pre-placement talk is scheduled for 2 September.\n\nReplace these dates and rules with the official T&P notice before a live term.",
+      "tag": "Placement",
+      "source": "Training & Placement",
+      "url": "",
+      "published": "2026-08-13",
+      "featured": false
+    },
+    {
+      "id": "fintech-react-intern",
+      "title": "Fintech startup hiring React + Node interns for a payments dashboard",
+      "summary": "Three-month paid internship, hybrid in Pune. Portfolio or GitHub required. Eight seats.",
+      "body": "A partner fintech is hiring interns to help build an internal payments dashboard. Stack in the brief is React and Node. The stint is three months, paid, hybrid in Pune.\n\nThey asked for a GitHub or a short portfolio. Interviews start next week. Eight seats in this demo listing.",
+      "tag": "Internship",
+      "source": "Industry partners",
+      "url": "",
+      "published": "2026-08-12",
+      "featured": false
+    },
+    {
+      "id": "sih-qualifier",
+      "title": "Internal qualifier for Smart India Hackathon",
+      "summary": "Teams of six. One-page problem statement due 10 September. Mentorship and a hardware kit for winners.",
+      "body": "The innovation cell will run an internal qualifier before the national Smart India Hackathon window.\n\nForm a team of six and file a one-page problem statement by 10 September. Winning teams in this demo get faculty mentorship and a small hardware kit.",
+      "tag": "Hackathon",
+      "source": "Innovation cell",
+      "url": "",
+      "published": "2026-08-11",
+      "featured": false
+    },
+    {
+      "id": "hospital-imaging",
+      "title": "Hospital partnership: student projects in medical imaging",
+      "summary": "Two faculty-led projects need students comfortable with Python and basic ML. Ethics training is mandatory.",
+      "body": "A partner hospital is opening two student projects in medical imaging. The brief assumes Python and a first course in machine learning.\n\nEthics training is required before any data access. Apply through the project office. This is placeholder copy for the client walkthrough.",
+      "tag": "Project",
+      "source": "Research office",
+      "url": "",
+      "published": "2026-08-10",
+      "featured": false
+    },
+    {
+      "id": "gs-workshop",
+      "title": "Goldman Sachs engineering workshop — resume to first-round loop",
+      "summary": "Friday 14:00, online. How the firm reads campus CVs, plus a live system-design prompt.",
+      "body": "Career services listed an online workshop with Goldman Sachs engineering. The session walks through how campus CVs are read and runs a short system-design prompt.\n\nRegister with a college email. Friday 14:00 in this demo calendar.",
+      "tag": "Workshop",
+      "source": "Career services",
+      "url": "",
+      "published": "2026-08-08",
+      "featured": false
+    }
+  ]
+}

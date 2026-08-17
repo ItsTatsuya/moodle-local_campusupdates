@@ -1,0 +1,69 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_campusupdates/feed_card
+
+    Single update card with expandable body.
+
+    Example context (json):
+    {
+        "title": "Campus GPU cluster opens",
+        "summary": "Shared GPU hours this term.",
+        "hasbody": true,
+        "paragraphs": [{"text": "More detail."}],
+        "tag": "AI",
+        "source": "TechCrunch",
+        "hasurl": true,
+        "url": "https://example.com",
+        "sourcelabel": "Open source article",
+        "displaydate": "Wednesday, 13 August 2026",
+        "featured": true,
+        "featuredlabel": "Featured",
+        "readmore": "Read more",
+        "showless": "Show less"
+    }
+}}
+<article class="local-campusupdates__card{{#featured}} is-featured{{/featured}}">
+    <div class="local-campusupdates__card-meta">
+        <span class="local-campusupdates__tag">{{tag}}</span>
+        {{#featured}}
+            <span class="local-campusupdates__featured-flag">{{featuredlabel}}</span>
+        {{/featured}}
+    </div>
+    <h3 class="local-campusupdates__card-title">{{title}}</h3>
+    <p class="local-campusupdates__card-summary">{{summary}}</p>
+    {{#hasbody}}
+        <details class="local-campusupdates__more">
+            <summary>
+                <span class="local-campusupdates__more-open">{{readmore}}</span>
+                <span class="local-campusupdates__more-close">{{showless}}</span>
+            </summary>
+            <div class="local-campusupdates__body">
+                {{#paragraphs}}
+                    <p>{{text}}</p>
+                {{/paragraphs}}
+                {{#hasurl}}
+                    <p><a href="{{url}}" target="_blank" rel="noopener noreferrer">{{sourcelabel}}</a></p>
+                {{/hasurl}}
+            </div>
+        </details>
+    {{/hasbody}}
+    <footer class="local-campusupdates__card-foot">
+        <span class="local-campusupdates__source">{{source}}</span>
+        <span class="local-campusupdates__date">{{displaydate}}</span>
+    </footer>
+</article>

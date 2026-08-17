@@ -1,0 +1,42 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_campusupdates/playground
+
+    Drag-and-drop decision flowchart for the business maths demo.
+}}
+<div id="cu-playground">
+    <p class="cu-play__status" id="cu-play-hint"></p>
+    <div class="cu-play">
+    <div class="cu-play__tray" id="cu-play-tray">
+        <p class="cu-play__tray-label">Blocks</p>
+        <button type="button" class="cu-play__chip" data-kind="start" draggable="true">Start</button>
+        <button type="button" class="cu-play__chip" data-kind="process" draggable="true">Process</button>
+        <button type="button" class="cu-play__chip" data-kind="formula" draggable="true">Formula</button>
+        <button type="button" class="cu-play__chip" data-kind="decision" draggable="true">Decision</button>
+        <button type="button" class="cu-play__chip" data-kind="end" draggable="true">End</button>
+        <div class="cu-play__tray-actions">
+            <button type="button" class="btn btn-sm btn-secondary" id="cu-play-sample">Load sample</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary" id="cu-play-clear">Clear</button>
+        </div>
+    </div>
+    <div class="cu-play__board" id="cu-play-board">
+        <svg class="cu-play__wires" id="cu-play-wires"></svg>
+        <div class="cu-play__nodes" id="cu-play-nodes"></div>
+    </div>
+    </div>
+</div>

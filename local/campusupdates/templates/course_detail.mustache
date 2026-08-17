@@ -1,0 +1,90 @@
+{{!
+    This file is part of Moodle - https://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <https://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_campusupdates/course_detail
+
+    Demo course page: video, copy, enquiry, workshop, steps or playground.
+}}
+<article class="local-campusupdates__detail" data-course="{{id}}">
+    <p class="local-campusupdates__back">
+        <a href="{{backurl}}">← {{backlabel}}</a>
+    </p>
+    <div class="local-campusupdates__card-meta">
+        <span class="local-campusupdates__tag">{{tag}}</span>
+        <span class="local-campusupdates__level">{{level}}</span>
+    </div>
+    <h2 class="local-campusupdates__detail-title">{{title}}</h2>
+    <p class="local-campusupdates__duration">{{duration}}</p>
+
+    <div class="local-campusupdates__video">
+        <iframe
+            src="https://www.youtube-nocookie.com/embed/{{youtubeid}}"
+            title="{{youtubetitle}}"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            loading="lazy">
+        </iframe>
+    </div>
+    <p class="local-campusupdates__video-cap">{{youtubetitle}}</p>
+
+    <div class="local-campusupdates__body">
+        {{#paragraphs}}
+            <p>{{text}}</p>
+        {{/paragraphs}}
+    </div>
+
+    <div class="local-campusupdates__actions">
+        <button type="button" class="btn btn-primary" data-cu-open="enquiry" data-cu-course="{{title}}">
+            {{enquirylabel}}
+        </button>
+        <button type="button" class="btn btn-outline-primary" data-cu-open="workshop"
+                data-cu-course="{{title}}" data-cu-workshop="cu-workshop-{{id}}">
+            {{workshoplabel}}
+        </button>
+    </div>
+    <div hidden id="cu-workshop-{{id}}">
+        <p data-title>{{workshoptitle}}</p>
+        {{#workshopparagraphs}}
+            <p>{{text}}</p>
+        {{/workshopparagraphs}}
+    </div>
+
+    {{#hassteps}}
+        <section class="local-campusupdates__steps" aria-label="{{stepslabel}}">
+            <h3>{{stepslabel}}</h3>
+            <ol>
+                {{#steps}}
+                    <li>
+                        <span class="local-campusupdates__step-num">{{number}}</span>
+                        <div>
+                            <h4>{{title}}</h4>
+                            <p>{{body}}</p>
+                        </div>
+                    </li>
+                {{/steps}}
+            </ol>
+        </section>
+    {{/hassteps}}
+
+    {{#hasplayground}}
+        <section class="local-campusupdates__play" aria-label="{{playgroundlabel}}">
+            <h3>{{playgroundlabel}}</h3>
+            <p class="local-campusupdates__note">{{playgroundhelp}}</p>
+            {{> local_campusupdates/playground }}
+        </section>
+    {{/hasplayground}}
+</article>

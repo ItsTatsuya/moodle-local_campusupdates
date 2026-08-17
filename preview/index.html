@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campus Updates · Moodle plugin preview</title>
+  <style>
+    :root {
+      --moodle: #0f6cbf;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --paper: #f4f6f8;
+      --card: #fff;
+      --accent: #4f46e5;
+      --accent-soft: rgba(79, 70, 229, 0.12);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+    }
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      height: 60px;
+      padding: 0 1.25rem;
+      background: var(--moodle);
+      color: #fff;
+    }
+    .brand { font-weight: 700; letter-spacing: 0.01em; }
+    .nav { display: flex; gap: 0.25rem; }
+    .nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 0.4rem 0.75rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
+    .nav a.is-on { background: rgba(255,255,255,0.18); }
+    .wrap { max-width: 1100px; margin: 1.25rem auto 3rem; padding: 0 1.25rem; }
+    .page-title { margin: 0 0 1rem; font-size: 1.75rem; }
+    .banner {
+      margin: 0 0 1rem;
+      padding: 0.7rem 0.9rem;
+      border-radius: 10px;
+      background: #e8f1fb;
+      color: #13446b;
+      font-size: 0.9rem;
+    }
+    .cu { --radius: 16px; }
+    .cu.is-tech { --accent: #4f46e5; --accent-soft: rgba(79,70,229,.12); }
+    .cu.is-course { --accent: #0f766e; --accent-soft: rgba(15,118,110,.12); }
+    .cu.is-industry { --accent: #b45309; --accent-soft: rgba(180,83,9,.12); }
+    .badge {
+      display: inline-block;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .subtitle { margin: 0.5rem 0 0; font-size: 1.15rem; opacity: 0.85; }
+    .note { margin: 0.75rem 0 0; font-size: 0.875rem; color: var(--muted); }
+    .tabs { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 0.75rem; margin: 1.25rem 0; }
+    .tab {
+      display: flex; flex-direction: column; gap: 0.2rem;
+      padding: 0.9rem 1rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+      cursor: pointer;
+      text-align: left;
+    }
+    .tab.is-active { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    .tab-label { font-size: 1.05rem; font-weight: 700; }
+    .tab-help { font-size: 0.8rem; color: var(--muted); }
+    .tab-count {
+      align-self: flex-start; margin-top: 0.45rem;
+      padding: 0.1rem 0.5rem; border-radius: 999px;
+      background: var(--accent-soft); color: var(--accent);
+      font-size: 0.75rem; font-weight: 700;
+    }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; }
+    .card {
+      display: flex; flex-direction: column;
+      padding: 1.15rem 1.2rem 1.05rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--card);
+    }
+    .card.is-featured {
+      grid-column: 1 / -1;
+      padding: 1.4rem 1.5rem 1.25rem;
+      background: linear-gradient(180deg, var(--accent-soft), transparent 42%), #fff;
+    }
+    .meta { display: flex; gap: 0.5rem; margin-bottom: 0.65rem; }
+    .tag, .flag {
+      padding: 0.15rem 0.55rem; border-radius: 999px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
+    }
+    .tag { background: var(--accent-soft); color: var(--accent); }
+    .flag { background: var(--accent); color: #fff; }
+    .card h3 { margin: 0 0 0.5rem; font-size: 1.15rem; line-height: 1.35; }
+    .card.is-featured h3 { font-size: 1.45rem; }
+    .card p { margin: 0 0 1rem; line-height: 1.55; opacity: 0.86; flex: 1; }
+    .foot {
+      display: flex; flex-wrap: wrap; gap: 0.4rem 0.85rem;
+      padding-top: 0.75rem; border-top: 1px solid var(--line); font-size: 0.8rem;
+    }
+    .cta { margin-left: auto; font-weight: 700; color: var(--accent); }
+    @media (max-width: 768px) {
+      .tabs, .grid { grid-template-columns: 1fr; }
+      .nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Moodle</div>
+    <nav class="nav">
+      <a href="#">Dashboard</a>
+      <a href="#">My courses</a>
+      <a class="is-on" href="#">Campus Updates</a>
+    </nav>
+  </header>
+  <main class="wrap">
+    <p class="banner">Browser preview of the <strong>local_campusupdates</strong> plugin. The real plugin lives in <code>moodle/local/campusupdates</code> and appears inside Moodle after install.</p>
+    <h1 class="page-title">Campus Updates</h1>
+    <div id="app" class="cu is-tech"></div>
+  </main>
+  <script>
+    const data = {
+      tech: [
+        { featured: true, tag: "AI", title: "Campus GPU cluster opens for student AI projects", summary: "The computing lab is piloting 40 shared GPU hours per student this term for coursework and approved research. Bookings open Monday through the lab portal.", source: "Campus Tech Office", date: "Thursday, 13 August 2026", cta: "Read more" },
+        { tag: "Research", title: "New paper cuts the cost of fine-tuning small language models", summary: "A research group showed a 4-bit adapter method that trains a 7B model on a single consumer GPU. Useful reading before the ML project sprint.", source: "arXiv daily", date: "Wednesday, 12 August 2026", cta: "Read more" },
+        { tag: "Security", title: "OWASP draft 2026 highlights prompt injection and supply-chain risk", summary: "The draft list calls out LLM prompt injection, dependency confusion, and leaked secrets in CI logs. The security elective will cover it in week 6.", source: "OWASP", date: "Tuesday, 11 August 2026", cta: "Read more" },
+        { tag: "Languages", title: "TypeScript 6 preview tightens type narrowing in async code", summary: "The preview compiler catches more null cases inside Promise chains. The web engineering course will switch the starter repo next week.", source: "TypeScript blog", date: "Monday, 10 August 2026", cta: "Read more" },
+        { tag: "Workshop", title: "Student IEEE chapter hosts a weekend Linux + containers workshop", summary: "Bring a laptop. Sessions cover systemd basics, Docker Compose, and how to reproduce a broken CI job locally. Seats are limited to 40.", source: "IEEE student chapter", date: "Sunday, 9 August 2026", cta: "Read more" },
+        { tag: "DevTools", title: "GitHub rolls out secret scanning on student organisation repos", summary: "Push protection is now on by default for the faculty org. Rotate any tokens that landed in old lab repos before Friday.", source: "Engineering blog", date: "Saturday, 8 August 2026", cta: "Read more" }
+      ],
+      course: [
+        { featured: true, tag: "Exams", title: "Mid-term timetable is now published for all undergraduate programmes", summary: "Exams run 15–22 September. Clash forms close this Friday at 17:00. Check your personal timetable before requesting a change.", source: "Academic office", date: "Friday, 14 August 2026", cta: "View details" },
+        { tag: "Deadline", title: "CS301 Algorithms: assignment 4 due Friday 23:59", summary: "Implement Dijkstra and A* on the provided city graph. Late work loses 10% per day. Clarification thread is pinned on the course page.", source: "CS301", date: "Thursday, 13 August 2026", cta: "Open course" },
+        { tag: "Lecture", title: "New lecture recording: Distributed Systems, week 7 — Raft", summary: "The recording and slide deck are on the course page. Watch before Thursday lab; the quiz assumes you have seen the leader-election walkthrough.", source: "CS412", date: "Wednesday, 12 August 2026", cta: "Open course" },
+        { tag: "Quiz", title: "Database Systems quiz on indexing opens Monday 09:00", summary: "Twenty multiple-choice questions, 30 minutes, one attempt. Topics: B+ trees, hash indexes, and query planner choices from labs 4–5.", source: "CS204", date: "Tuesday, 11 August 2026", cta: "Open course" },
+        { tag: "Guest lecture", title: "Guest lecture: staff engineer from Razorpay on payment systems", summary: "Wednesday 16:00, Seminar Hall B. Attendance counts toward the professional practice seminar. Register on the course page.", source: "Industry seminar", date: "Monday, 10 August 2026", cta: "View details" },
+        { tag: "Project", title: "Software project groups must be finalised by Wednesday", summary: "Teams of 3–4. Solo submissions need supervisor approval. Use the group tool on the project course page so repos can be created.", source: "CS399", date: "Sunday, 9 August 2026", cta: "Open course" }
+      ],
+      industry: [
+        { featured: true, tag: "Internship", title: "Amazon SDE internship applications open for summer 2027", summary: "Roles in Bangalore, Hyderabad, and remote-first teams. Online assessment in October. Career services will run a prep session next Tuesday.", source: "Career services", date: "Friday, 14 August 2026", cta: "Apply" },
+        { tag: "Placement", title: "Infosys campus placement drive — 4 September", summary: "Eligible: 2027 batch, CGPA 6.5+, no active backlogs. Register on the placement portal by 28 August. Pre-placement talk is 2 September.", source: "Training & Placement", date: "Thursday, 13 August 2026", cta: "Apply" },
+        { tag: "Internship", title: "Fintech startup hiring React + Node interns for a payments dashboard", summary: "Three-month paid internship, hybrid in Pune. Portfolio or GitHub required. Interviews start next week; 8 seats.", source: "Industry partners", date: "Wednesday, 12 August 2026", cta: "Apply" },
+        { tag: "Hackathon", title: "Internal qualifier for Smart India Hackathon", summary: "Form teams of 6 and submit a one-page problem statement by 10 September. Winning teams get mentorship and a hardware kit.", source: "Innovation cell", date: "Tuesday, 11 August 2026", cta: "View details" },
+        { tag: "Project", title: "Hospital partnership: student projects in medical imaging", summary: "Two faculty-led projects need students comfortable with Python and basic ML. Ethics training is mandatory. Apply through the project office.", source: "Research office", date: "Monday, 10 August 2026", cta: "View details" },
+        { tag: "Workshop", title: "Goldman Sachs engineering workshop — resume to first-round loop", summary: "Friday 14:00, online. Covers how the firm reads campus CVs and a live system-design prompt. Register with your college email.", source: "Career services", date: "Saturday, 8 August 2026", cta: "View details" }
+      ]
+    };
+    const meta = {
+      tech: { label: "Tech", help: "Technology and AI news" },
+      course: { label: "Course", help: "Course notices and deadlines" },
+      industry: { label: "Industry", help: "Placements, internships, and projects" }
+    };
+    const app = document.getElementById("app");
+    let section = "tech";
+
+    function card(item) {
+      return `<article class="card${item.featured ? " is-featured" : ""}">
+        <div class="meta">
+          <span class="tag">${item.tag}</span>
+          ${item.featured ? `<span class="flag">Featured</span>` : ""}
+        </div>
+        <h3>${item.title}</h3>
+        <p>${item.summary}</p>
+        <footer class="foot">
+          <span>${item.source}</span>
+          <span style="opacity:.7">${item.date}</span>
+          <span class="cta">${item.cta}</span>
+        </footer>
+      </article>`;
+    }
+
+    function render() {
+      app.className = "cu is-" + section;
+      const tabs = Object.keys(meta).map((key) => `
+        <button class="tab${key === section ? " is-active" : ""}" data-section="${key}">
+          <span class="tab-label">${meta[key].label}</span>
+          <span class="tab-help">${meta[key].help}</span>
+          <span class="tab-count">${data[key].length}</span>
+        </button>`).join("");
+      app.innerHTML = `
+        <header>
+          <span class="badge">Demo data</span>
+          <p class="subtitle">Tech news, course notices, and industry opportunities in one place.</p>
+          <p class="note">All items below are placeholder content for demonstration only.</p>
+        </header>
+        <nav class="tabs">${tabs}</nav>
+        <section class="grid">${data[section].map(card).join("")}</section>`;
+      app.querySelectorAll("[data-section]").forEach((btn) => {
+        btn.addEventListener("click", () => { section = btn.dataset.section; render(); });
+      });
+    }
+    render();
+  </script>
+</body>
+</html>

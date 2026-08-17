@@ -1,0 +1,160 @@
+{
+  "source": "json",
+  "updated": "2026-08-15",
+  "items": [
+    {
+      "id": "databricks-190b",
+      "title": "Databricks valued at $190 billion after a $5 billion funding round",
+      "summary": "The data and AI platform company closed one of the year’s largest private raises, underscoring how enterprise AI infrastructure is still attracting capital.",
+      "body": "Databricks said it raised about $5 billion in a round that values the company at $190 billion. The deal is one of the largest late-stage financings of 2026 and puts the firm in the same conversation as the biggest public software names.\n\nThe company sells a lakehouse platform that many enterprises use to train, serve, and govern AI workloads. Investors are betting that firms will keep spending on data plumbing even if model prices fall.\n\nFor students, the story is a reminder that “AI jobs” are not only at model labs. Data platforms, governance, and integration work are where a lot of the hiring still sits.",
+      "tag": "AI",
+      "source": "Reuters",
+      "url": "https://www.reuters.com/technology/artificial-intelligence/",
+      "published": "2026-08-13",
+      "featured": true
+    },
+    {
+      "id": "anthropic-ipo-outlook",
+      "title": "Anthropic IPO talk hinges on a $190–200 billion 2028 revenue case",
+      "summary": "People familiar with the process say bankers are stretching the usual forecast window to price a possible listing of the Claude maker.",
+      "body": "As Anthropic prepares for what could be one of the largest technology listings on record, Wall Street is looking further out than it usually does. Sources told Reuters the valuation case leans on how much revenue the company might generate in 2028, in a $190–200 billion range used as a planning assumption — not a guarantee.\n\nThat kind of long-dated forecast is unusual for an IPO book and shows how hard it is to price AI labs whose costs and prices are still moving every quarter.\n\nThe takeaway for a management classroom: when you cannot value a firm on next year’s earnings, investors start arguing about adoption curves, compute costs, and who captures the margin.",
+      "tag": "Markets",
+      "source": "Reuters",
+      "url": "https://www.reuters.com/business/anthropic-ipo-valuation-hinges-190-200-billion-2028-revenue-forecast-sources-say-2026-08-15/",
+      "published": "2026-08-15",
+      "featured": false
+    },
+    {
+      "id": "google-visible-watermark",
+      "title": "Google lets users turn off the visible watermark on Gemini media",
+      "summary": "Images, video, and audio from Nano Banana, Omni, and Lyria can drop the on-image mark. Invisible SynthID and C2PA metadata stay on.",
+      "body": "Google said users will be able to remove the visible watermark from Gemini-generated images, videos, and songs. The toggle is rolling out in Gemini and the Flow video editor, with Search support to follow. Settings live under Media Watermark.\n\nInvisible SynthID marks and C2PA content credentials remain in place, so the company still claims you can check in Gemini or Search whether a file was AI-made. Google is also open-sourcing Credentio, a C library for embedding local C2PA checks in apps.\n\nThe move sits next to Anthropic’s more aggressive text watermarking for Claude, which some users criticised as a workplace and classroom detector. Visible marks help casual viewers; invisible marks are what regulators and platforms actually query.",
+      "tag": "AI",
+      "source": "TechCrunch",
+      "url": "https://techcrunch.com/2026/08/14/google-will-now-allow-users-to-remove-visible-watermark-from-its-ai-generations/",
+      "published": "2026-08-14",
+      "featured": false
+    },
+    {
+      "id": "ibm-openai-enterprise",
+      "title": "IBM partners with OpenAI to push enterprise AI",
+      "summary": "The deal is aimed at companies that want model access wrapped in IBM’s consulting, software, and industry workflows.",
+      "body": "IBM and OpenAI announced a partnership to help large organisations adopt generative AI with more of the controls enterprises expect: identity, data residency, and industry process templates.\n\nIBM has spent years selling Watson and consulting around automation. Pairing that channel with OpenAI’s models is a bet that most buyers still want a systems integrator, not a raw API key.\n\nFor management students this is the classic “who owns the customer” story. The model vendor has the capability; the incumbent vendor has the procurement relationship and the implementation bench.",
+      "tag": "Enterprise",
+      "source": "TechCrunch",
+      "url": "https://techcrunch.com/2026/08/13/ibm-partners-with-openai-to-bolster-enterprise-ai-push/",
+      "published": "2026-08-13",
+      "featured": false
+    },
+    {
+      "id": "nvidia-openai-ohio",
+      "title": "Nvidia trims a huge credit guarantee for an Ohio OpenAI data centre",
+      "summary": "Reporting says Nvidia scaled back support that had been discussed around a very large OpenAI campus build.",
+      "body": "Nvidia has scaled back a funding guarantee tied to a planned OpenAI data centre in Ohio, according to reports this week. Earlier talk had put the support in the tens or even hundreds of billions of dollars of credit for construction and chips.\n\nEven a reduced package would still be unusual. Chip vendors do not normally underwrite their customers’ power plants and buildings at this scale. It shows how tightly model labs, GPU suppliers, and power projects are now bound together.\n\nThe management question is concentration risk: if one customer, one chip, and one campus move in lockstep, whose balance sheet takes the hit when demand slips?",
+      "tag": "Infrastructure",
+      "source": "Reuters / WSJ",
+      "url": "https://www.reuters.com/business/nvidia-scales-back-250-billion-openai-data-center-guarantee-wsj-reports-2026-08-14/",
+      "published": "2026-08-14",
+      "featured": false
+    },
+    {
+      "id": "openai-revenue-40b",
+      "title": "OpenAI revenue run rate reported above $40 billion as listing talk grows",
+      "summary": "Television and market coverage this week put the company’s annualised revenue above $40 billion while IPO planning continues.",
+      "body": "Market coverage on 14 August put OpenAI’s revenue run rate above $40 billion. That figure is annualised, not audited full-year revenue, but it is the number investors are using to argue about a future listing.\n\nGrowth at that speed usually comes with matching compute bills. The interesting number for a finance class is not the top line — it is how much of each new dollar is left after GPU leases, energy, and inference discounts.\n\nIf the run rate is real and durable, OpenAI is already one of the largest software businesses on earth. If it depends on a few enterprise contracts and a consumer price that can still fall, the multiple will compress fast.",
+      "tag": "Markets",
+      "source": "Bloomberg Television",
+      "url": "https://www.youtube.com/watch?v=_L2DQ9iCGBE",
+      "published": "2026-08-14",
+      "featured": false
+    },
+    {
+      "id": "writer-token-costs",
+      "title": "Writer ships a new model and harness aimed at token costs",
+      "summary": "The enterprise writing company is pitching cheaper, more contained generations rather than a bigger flagship model.",
+      "body": "Writer introduced a new model plus an upgraded “harness” that is meant to keep token spend under control for corporate users. The pitch is practical: most enterprise tasks do not need a frontier model on every call.\n\nToken cost has become a line item that finance teams can see. Vendors that help clients cap that bill — with routing, caching, or smaller specialists — are selling a management tool as much as a model.\n\nThis is a useful case for the AI-for-business course: the product decision is not “which model is smartest?” It is “which workflow is cheap enough to run every day.”",
+      "tag": "Enterprise",
+      "source": "TechCrunch",
+      "url": "https://techcrunch.com/2026/08/13/writer-introduces-new-ai-model-and-upgraded-harness-to-contain-token-costs/",
+      "published": "2026-08-13",
+      "featured": false
+    },
+    {
+      "id": "kog-gpu-inference",
+      "title": "Kog is trying to squeeze more inference out of the same GPUs",
+      "summary": "The startup is going after serving efficiency — more answers per card — as inference, not training, becomes the bill that matters.",
+      "body": "Kog, whose CEO presented at an AMD AI event this week, is building software that aims to get more inference throughput from existing GPUs. Training still makes headlines; inference is what companies pay for every hour after launch.\n\nIf you can raise tokens per second without buying another rack, you change the unit economics of a chatbot, a copilot, or an internal search tool.\n\nExpect more of these “systems software” companies. The next wave of AI vendors may look like compiler and scheduler shops, not another chat app.",
+      "tag": "Infrastructure",
+      "source": "TechCrunch",
+      "url": "https://techcrunch.com/2026/08/14/kog-is-going-deeper-to-squeeze-more-inference-out-of-gpus/",
+      "published": "2026-08-14",
+      "featured": false
+    },
+    {
+      "id": "open-weight-policy",
+      "title": "US senator urges support for American open-weight AI models",
+      "summary": "A Republican senator asked the White House to back open-weight models built in the US as the industry argues over closed vs open releases.",
+      "body": "A US senator publicly urged the administration to favour American open-weight models. The letter sits inside a wider fight: labs that keep weights closed say they are managing risk; open-weight advocates say closed stacks concentrate power and push developers toward foreign checkpoints.\n\nOpen-weight does not mean unregulated. It means the parameters can be downloaded and fine-tuned. That is attractive to universities, startups, and governments that do not want every query to leave the building.\n\nPolicy students should watch procurement language. If public agencies are told to prefer open-weight domestic models, that becomes a market in one sentence.",
+      "tag": "Policy",
+      "source": "Reuters",
+      "url": "https://www.reuters.com/business/republican-senator-urges-trump-back-us-open-weight-ai-models-amid-industry-2026-08-14/",
+      "published": "2026-08-14",
+      "featured": false
+    },
+    {
+      "id": "anthropic-text-watermark",
+      "title": "Anthropic adds harder-to-see watermarks to Claude text and files",
+      "summary": "New Claude models embed provenance so generated text can be traced, a step the company ties to EU rules — and that some users dislike.",
+      "body": "Anthropic said newer Claude models will carry an invisible watermark in generated text, with supported files able to hold provenance metadata. The mark is meant to survive ordinary copy-and-paste and light edits.\n\nThe company frames this as transparency for EU AI rules. Critics say it can also reveal that someone used Claude at work or in class, even when nothing looks unusual on the page.\n\nGoogle’s optional visible mark and Anthropic’s always-on text mark are two different answers to the same question: who has to know this was written by a model?",
+      "tag": "Policy",
+      "source": "TechCrunch",
+      "url": "https://techcrunch.com/2026/08/11/anthropic-says-it-will-watermark-text-generated-by-its-ai-models/",
+      "published": "2026-08-11",
+      "featured": false
+    },
+    {
+      "id": "sk-hynix-nasdaq",
+      "title": "SK Hynix lists on Nasdaq in a $26.5 billion AI-memory deal",
+      "summary": "The high-bandwidth memory supplier used the largest ADR offering of its kind to give US investors a direct stake in the AI chip boom.",
+      "body": "South Korean memory maker SK Hynix began trading on Nasdaq in what reports called the largest American depositary receipt offering in financial history, raising about $26.5 billion. The company is the leading supplier of high-bandwidth memory used in Nvidia-class accelerators.\n\nIts shares had already run hard on AI demand. The listing funds more fabrication capacity in Korea and lets US portfolios hold the memory layer of the AI stack, not only the GPU names.\n\nBusiness-math angle: when one input (HBM) is scarce, its maker can take a surprising share of the industry’s profit even if it does not sell the famous chip on the board.",
+      "tag": "Semiconductors",
+      "source": "Industry reports",
+      "url": "https://www.crescendo.ai/news/latest-ai-news-and-updates",
+      "published": "2026-07-10",
+      "featured": false
+    },
+    {
+      "id": "kaist-ai-chip",
+      "title": "KAIST programmable AI chip cuts prediction errors about 40-fold",
+      "summary": "Researchers described a semiconductor design that can be reconfigured for different inference jobs and reported a large drop in prediction error.",
+      "body": "KAIST researchers reported a programmable AI semiconductor that reduced prediction errors dramatically — on the order of 40 times in the tasks they published — by letting the chip be specialised after manufacture.\n\nFixed accelerators are fast but narrow. A chip you can retarget is more like a factory you can retool. That matters if today’s hot model family is not next year’s.\n\nThis is early research, not a shipping product. It is still a clean example for class: hardware strategy is a bet on how long a workload stays still.",
+      "tag": "Research",
+      "source": "Innovation News Network",
+      "url": "https://www.innovationnewsnetwork.com/programmable-ai-semiconductor-cuts-prediction-errors/72504/",
+      "published": "2026-08-12",
+      "featured": false
+    },
+    {
+      "id": "hyperscaler-gas",
+      "title": "Hyperscalers may regret locking in natural gas for AI power",
+      "summary": "A new forecast argues that data-centre operators racing into gas generation could be stuck with the wrong long-term energy mix.",
+      "body": "TechCrunch reported on a forecast that large cloud and AI operators might regret leaning so hard on natural gas to feed new data centres. Gas plants can be built faster than nuclear or large renewables-plus-storage, which is why they show up in 2026 power deals.\n\nThe risk is a 15-year asset against a 3-year model cycle. If demand, regulation, or carbon prices move, those plants become expensive stranded kit.\n\nFor a management case: energy is now part of the AI product cost, not a facilities footnote. The same spreadsheet that prices a token should price a megawatt.",
+      "tag": "Climate",
+      "source": "TechCrunch",
+      "url": "https://techcrunch.com/2026/08/14/hyperscalers-might-regret-embracing-natural-gas-if-new-forecast-proves-correct/",
+      "published": "2026-08-14",
+      "featured": false
+    },
+    {
+      "id": "z-ai-glm53",
+      "title": "China’s Z.ai pitches GLM-5.3 as a cyber-defence model",
+      "summary": "The Beijing lab is selling its newest open-leaning model as a tool for security teams, citing recent supply-chain incidents on public model hubs.",
+      "body": "Z.ai, the Beijing-based developer behind the GLM line, highlighted GLM-5.3 as useful for cyber defence and pointed to a recent Hugging Face-related incident as a reason to care about open security models.\n\nOpen models that can read logs, diffs, and configs are attractive to teams that cannot send production telemetry to a US API. They also raise the usual dual-use problem: the same model that hunts a vulnerability can help write one.\n\nWorth pairing with the US open-weight debate in the same week. Both stories are about who is allowed to run capable models on their own hardware.",
+      "tag": "Security",
+      "source": "The Information",
+      "url": "https://www.theinformation.com/",
+      "published": "2026-08-14",
+      "featured": false
+    }
+  ]
+}
