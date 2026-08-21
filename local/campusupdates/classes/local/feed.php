@@ -89,4 +89,13 @@ class feed {
         }
         return null;
     }
+
+    /**
+     * Bakery sample used by the workshop. Never store computed values.
+     *
+     * @return array
+     */
+    public static function workshop_sample(): array {
+        return self::decode('workshop-sample');
+    }
 }

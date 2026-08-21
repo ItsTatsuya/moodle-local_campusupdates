@@ -50,16 +50,16 @@
       "title": "Business Mathematics for Management Students",
       "tag": "Quantitative",
       "level": "Undergraduate / first-year MBA",
-      "duration": "Demo playground — full units later",
-      "summary": "Numbers managers actually use: cost, price, break-even, and a first look at a decision flow. Drag blocks on the canvas to sketch how a choice is made.",
-      "description": "This demonstration course is for students who will sit in pricing, operations, or finance meetings and need to follow the arithmetic.\n\nThe video is a public break-even lecture used as a stand-in. Below it is a playground: drag process, decision, and formula blocks onto the canvas and link them. That is the “flowchart” piece of the demo — a working sketch, not the final taught product.\n\nRelated enquiry is for questions about the course. Workshop is the hands-on lab where students build a break-even flow for a real product.",
+      "duration": "Workshop — find the most profitable mix",
+      "summary": "A shop sells puffs and teas. The workshop turns seven business numbers into a profit landscape, then lets you walk uphill to the best mix.",
+      "description": "This demonstration course is for students who will sit in pricing, operations, or finance meetings and need to follow the arithmetic.\n\nThe video is a public lecture used as a stand-in. The Workshop button opens a four-screen lab: enter the business, hold one product still to read the slope, walk both sliders uphill, then take a one-page recommendation away.\n\nRelated enquiry is for questions about the course. Workshop is the hands-on module.",
       "youtubeid": "9nFYVS4HM5A",
       "youtubetitle": "Breakeven analysis — Business Mathematics",
       "mode": "playground",
       "steps": [],
       "workshop": {
-        "title": "Workshop: build a break-even flow",
-        "body": "A lab session. Each pair takes a simple product (fixed cost, variable cost, price) and builds the decision flow on paper or in this playground. Faculty walk the room and challenge the assumptions.\n\nThis registration form is a demonstration. Seats will open when the live timetable is set."
+        "title": "Workshop: find the most profitable mix",
+        "body": "Four screens. Enter a few numbers about a shop, see profit as a landscape, hold one product still to read the slope in rupees, walk both sliders uphill, then take a one-page recommendation away.\n\nLoad the bakery sample to present in under a minute. Nothing is saved on this demonstration site."
       }
     }
   ]

@@ -39,13 +39,18 @@ class index_page implements renderable, named_templatable {
     /** @var string */
     private string $courseid;
 
+    /** @var string */
+    private string $view;
+
     /**
      * @param string $section Requested section key.
      * @param string $courseid Optional course id when section is course.
+     * @param string $view Optional view (workshop).
      */
-    public function __construct(string $section, string $courseid = '') {
+    public function __construct(string $section, string $courseid = '', string $view = '') {
         $this->section = placeholder::resolve_section($section);
         $this->courseid = $courseid;
+        $this->view = $view;
     }
 
     /**
@@ -85,7 +90,7 @@ class index_page implements renderable, named_templatable {
         $data->subtitle = get_string('pagesubtitle', 'local_campusupdates');
         $data->demobadge = get_string('demobadge', 'local_campusupdates');
         $data->placeholdernote = get_string('placeholdernote', 'local_campusupdates');
-        $data->sectionclass = 'is-' . $this->section;
+        $data->sectionclass = 'is-' . $this->section . ($this->view === 'workshop' ? ' is-workshop' : '');
         $data->tabs = $tabs;
         $data->istech = $this->section === 'tech';
         $data->iscourse = $this->section === 'course';
@@ -102,6 +107,8 @@ class index_page implements renderable, named_templatable {
         $data->hascourselist = false;
         $data->courselist = [];
         $data->hascoursedetail = false;
+        $data->hasworkshop = false;
+        $data->workshop = null;
         $data->course = null;
         $data->enquiry = $this->export_enquiry();
         $data->enquiryjson = json_encode($data->enquiry);
@@ -139,6 +146,19 @@ class index_page implements renderable, named_templatable {
      */
     private function export_course_view(stdClass $data): void {
         $selected = $this->courseid !== '' ? feed::course($this->courseid) : null;
+        if ($selected && $this->view === 'workshop' && ($selected['id'] ?? '') === 'business-math') {
+            $data->hasworkshop = true;
+            $data->workshop = [
+                'title' => $selected['title'] ?? '',
+                'backurl' => (new moodle_url('/local/campusupdates/index.php', [
+                    'section' => 'course',
+                    'course' => 'business-math',
+                ]))->out(false),
+                'backlabel' => get_string('backtocourse', 'local_campusupdates'),
+                'samplejson' => json_encode(feed::workshop_sample(), JSON_UNESCAPED_UNICODE),
+            ];
+            return;
+        }
         if ($selected) {
             $data->hascoursedetail = true;
             $data->course = $this->export_course($selected);
@@ -221,7 +241,13 @@ class index_page implements renderable, named_templatable {
             'youtubetitle' => $course['youtubetitle'] ?? '',
             'hassteps' => !empty($steps),
             'steps' => $steps,
-            'hasplayground' => ($course['mode'] ?? '') === 'playground',
+            'hasplayground' => false,
+            'hasworkshopmodule' => $id === 'business-math',
+            'workshopurl' => (new moodle_url('/local/campusupdates/index.php', [
+                'section' => 'course',
+                'course' => $id,
+                'view' => 'workshop',
+            ]))->out(false),
             'backurl' => (new moodle_url('/local/campusupdates/index.php', ['section' => 'course']))->out(false),
             'backlabel' => get_string('backtocourses', 'local_campusupdates'),
             'enquirylabel' => get_string('relatedenquiry', 'local_campusupdates'),

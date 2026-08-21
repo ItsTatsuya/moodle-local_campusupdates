@@ -49,6 +49,7 @@ $string['viewdetails'] = 'View details';
 $string['applynow'] = 'Apply';
 $string['noitems'] = 'No updates in this section yet.';
 $string['backtocourses'] = 'All courses';
+$string['backtocourse'] = 'Back to course';
 $string['relatedenquiry'] = 'Related enquiry';
 $string['workshop'] = 'Workshop';
 $string['stepspath'] = 'Step by step';

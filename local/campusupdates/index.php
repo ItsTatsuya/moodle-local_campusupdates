@@ -31,6 +31,7 @@ require_capability('local/campusupdates:view', $context);
 
 $section = optional_param('section', '', PARAM_ALPHA);
 $courseid = optional_param('course', '', PARAM_ALPHANUMEXT);
+$view = optional_param('view', '', PARAM_ALPHA);
 
 $urlparams = [];
 if ($section !== '') {
@@ -38,6 +39,9 @@ if ($section !== '') {
 }
 if ($courseid !== '') {
     $urlparams['course'] = $courseid;
+}
+if ($view !== '') {
+    $urlparams['view'] = $view;
 }
 
 $PAGE->set_context($context);
@@ -48,11 +52,12 @@ $PAGE->set_heading(get_string('pageheading', 'local_campusupdates'));
 $PAGE->set_primary_active_tab('local_campusupdates');
 $PAGE->add_body_class('local-campusupdates-page');
 $PAGE->requires->js(new moodle_url('/local/campusupdates/js/ui.js'));
-if ($courseid === 'business-math') {
-    $PAGE->requires->js(new moodle_url('/local/campusupdates/js/playground.js'));
+if ($courseid === 'business-math' && $view === 'workshop') {
+    $PAGE->add_body_class('local-campusupdates-workshop');
+    $PAGE->requires->js(new moodle_url('/local/campusupdates/js/workshop.js', ['rev' => '2026081904']));
 }
 
-$page = new \local_campusupdates\output\index_page($section, $courseid);
+$page = new \local_campusupdates\output\index_page($section, $courseid, $view);
 
 echo $OUTPUT->header();
 echo $OUTPUT->render($page);

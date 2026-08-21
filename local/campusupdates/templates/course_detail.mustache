@@ -51,10 +51,15 @@
         <button type="button" class="btn btn-primary" data-cu-open="enquiry" data-cu-course="{{title}}">
             {{enquirylabel}}
         </button>
-        <button type="button" class="btn btn-outline-primary" data-cu-open="workshop"
-                data-cu-course="{{title}}" data-cu-workshop="cu-workshop-{{id}}">
-            {{workshoplabel}}
-        </button>
+        {{#hasworkshopmodule}}
+            <a class="btn btn-outline-primary" href="{{workshopurl}}">{{workshoplabel}}</a>
+        {{/hasworkshopmodule}}
+        {{^hasworkshopmodule}}
+            <button type="button" class="btn btn-outline-primary" data-cu-open="workshop"
+                    data-cu-course="{{title}}" data-cu-workshop="cu-workshop-{{id}}">
+                {{workshoplabel}}
+            </button>
+        {{/hasworkshopmodule}}
     </div>
     <div hidden id="cu-workshop-{{id}}">
         <p data-title>{{workshoptitle}}</p>

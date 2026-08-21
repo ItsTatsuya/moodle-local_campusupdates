@@ -1,0 +1,20 @@
+{
+  "name": "Bakery — March actuals",
+  "price1": 30,
+  "priceDrop1": 0.05,
+  "cost1": 12.5,
+  "price2": 16,
+  "priceDrop2": 0.02,
+  "cost2": 4.5,
+  "congestion": 0.01,
+  "fixedCost": 1000,
+  "currentX": 200,
+  "currentY": 150,
+  "labels": {
+    "product1": "puffs",
+    "product2": "teas",
+    "unit1": "puffs per day",
+    "unit2": "teas per day",
+    "currency": "₹"
+  }
+}
