@@ -1,0 +1,29 @@
+{{!
+    @template local_campusupdates/workshop_walk
+    Walk both sliders uphill.
+}}
+<div class="cu-ws__toolbar">
+    <span>Walk</span>
+    <button type="button" class="btn btn-primary btn-sm" id="ws-solve">Jump to the top</button>
+    <button type="button" class="btn btn-secondary btn-sm" id="ws-arrow">Hide arrow</button>
+    <button type="button" class="btn btn-secondary btn-sm" id="ws-reset-c">Back to today</button>
+</div>
+<div class="cu-ws__split cu-ws__split--c">
+    <div>
+        <p class="cu-ws__caption">Map from above — same-profit rings. Darker is more money.</p>
+        <canvas id="ws-canvas-c" width="640" height="400" aria-label="Map of the profit hill from above"></canvas>
+        <p class="cu-ws__legend"><span class="cu-ws__swatch cu-ws__swatch--you"></span> You are here <span class="cu-ws__swatch cu-ws__swatch--peak"></span> Top of the hill <span class="cu-ws__swatch cu-ws__swatch--up"></span> Uphill</p>
+    </div>
+    <div class="cu-ws__levers">
+        <label><span id="ws-walk-x-name">Puffs per day</span>
+            <input type="range" id="ws-slider-x" min="0" max="400" step="1" value="200">
+            <span id="ws-slider-x-val">200</span>
+        </label>
+        <label><span id="ws-walk-y-name">Teas per day</span>
+            <input type="range" id="ws-slider-y" min="0" max="500" step="1" value="150">
+            <span id="ws-slider-y-val">150</span>
+        </label>
+        <p class="cu-ws__pair" id="ws-solve-pair" hidden></p>
+        <p class="cu-ws__slope cu-ws__slope--sm" id="ws-slope-c"></p>
+    </div>
+</div>

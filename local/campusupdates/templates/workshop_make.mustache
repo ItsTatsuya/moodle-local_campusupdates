@@ -1,0 +1,79 @@
+{{!
+    @template local_campusupdates/workshop_make
+    Build a new two-product question, then replay the same graphs.
+}}
+<section class="cu-ws__screen" data-screen="make">
+    <p class="cu-ws__mission">Invent a new two-product shop. The graphs stay the same — names, numbers, and the story all change. Then play your question from the start.</p>
+    <div class="cu-ws__make" id="ws-make">
+        <div class="cu-ws__make-build">
+            <p class="cu-ws__caption">Start from a ready shop, or type your own</p>
+            <div class="cu-ws__presets" id="ws-q-presets">
+                <button type="button" class="btn btn-outline-primary btn-sm" data-preset="bakery">Bakery (puffs / teas)</button>
+                <button type="button" class="btn btn-outline-primary btn-sm" data-preset="wraps">Food cart (wraps / juice)</button>
+                <button type="button" class="btn btn-outline-primary btn-sm" data-preset="print">Print stall (posters / flyers)</button>
+            </div>
+            <form class="cu-ws__form cu-ws__form--q" id="ws-q-form" autocomplete="off">
+                <label>Shop name
+                    <input name="name" type="text" maxlength="80" required>
+                </label>
+                <label>First product
+                    <input name="product1" type="text" maxlength="40" required>
+                    <span>What you sell on the first axis</span>
+                </label>
+                <label>Second product
+                    <input name="product2" type="text" maxlength="40" required>
+                    <span>What you sell on the second axis</span>
+                </label>
+                <fieldset>
+                    <legend id="ws-q-leg-1">First product</legend>
+                    <label>Starting price
+                        <input name="price1" type="number" step="0.01" required>
+                    </label>
+                    <label>Price drop per extra unit
+                        <input name="priceDrop1" type="number" step="0.001" required>
+                    </label>
+                    <label>Cost per unit
+                        <input name="cost1" type="number" step="0.01" required>
+                    </label>
+                    <label>What we sell today
+                        <input name="currentX" type="number" step="1" required>
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend id="ws-q-leg-2">Second product</legend>
+                    <label>Starting price
+                        <input name="price2" type="number" step="0.01" required>
+                    </label>
+                    <label>Price drop per extra unit
+                        <input name="priceDrop2" type="number" step="0.001" required>
+                    </label>
+                    <label>Cost per unit
+                        <input name="cost2" type="number" step="0.01" required>
+                    </label>
+                    <label>What we sell today
+                        <input name="currentY" type="number" step="1" required>
+                    </label>
+                </fieldset>
+                <fieldset>
+                    <legend>The shop</legend>
+                    <label>Congestion (when both are busy)
+                        <input name="congestion" type="number" step="0.001" required>
+                    </label>
+                    <label>Fixed cost per day
+                        <input name="fixedCost" type="number" step="1" required>
+                    </label>
+                </fieldset>
+            </form>
+            <p class="cu-ws__make-warn" id="ws-make-warn" hidden></p>
+            <div class="cu-ws__make-actions">
+                <button type="button" class="btn btn-primary" id="ws-q-play">Play this question</button>
+            </div>
+        </div>
+        <div class="cu-ws__make-graph">
+            <p class="cu-ws__caption">Preview — same graphs, your numbers</p>
+            <canvas id="ws-canvas-make" width="640" height="400" aria-label="Preview of the custom profit hill"></canvas>
+            <p class="cu-ws__here" id="ws-q-here"></p>
+            <p class="cu-ws__legend"><span class="cu-ws__swatch cu-ws__swatch--you"></span> Today <span class="cu-ws__swatch cu-ws__swatch--peak"></span> Top</p>
+        </div>
+    </div>
+</section>

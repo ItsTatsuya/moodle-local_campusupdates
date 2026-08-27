@@ -42,15 +42,37 @@ class index_page implements renderable, named_templatable {
     /** @var string */
     private string $view;
 
+    /** @var string */
+    private string $chapter;
+
+    /** @var string */
+    private string $topic;
+
+    /** @var string */
+    private string $mode;
+
     /**
      * @param string $section Requested section key.
      * @param string $courseid Optional course id when section is course.
      * @param string $view Optional view (workshop).
+     * @param string $chapter Optional chapter id.
+     * @param string $topic Optional topic id.
+     * @param string $mode simple or advanced.
      */
-    public function __construct(string $section, string $courseid = '', string $view = '') {
+    public function __construct(
+        string $section,
+        string $courseid = '',
+        string $view = '',
+        string $chapter = '',
+        string $topic = '',
+        string $mode = ''
+    ) {
         $this->section = placeholder::resolve_section($section);
         $this->courseid = $courseid;
         $this->view = $view;
+        $this->chapter = $chapter;
+        $this->topic = $topic;
+        $this->mode = $mode === 'advanced' ? 'advanced' : 'simple';
     }
 
     /**
@@ -90,7 +112,9 @@ class index_page implements renderable, named_templatable {
         $data->subtitle = get_string('pagesubtitle', 'local_campusupdates');
         $data->demobadge = get_string('demobadge', 'local_campusupdates');
         $data->placeholdernote = get_string('placeholdernote', 'local_campusupdates');
-        $data->sectionclass = 'is-' . $this->section . ($this->view === 'workshop' ? ' is-workshop' : '');
+        $data->sectionclass = 'is-' . $this->section
+            . ($this->view === 'workshop' ? ' is-workshop' : '')
+            . ($this->chapter !== '' && $this->view !== 'workshop' ? ' is-chapter' : '');
         $data->tabs = $tabs;
         $data->istech = $this->section === 'tech';
         $data->iscourse = $this->section === 'course';
@@ -108,7 +132,9 @@ class index_page implements renderable, named_templatable {
         $data->courselist = [];
         $data->hascoursedetail = false;
         $data->hasworkshop = false;
+        $data->haschapter = false;
         $data->workshop = null;
+        $data->chapter = null;
         $data->course = null;
         $data->enquiry = $this->export_enquiry();
         $data->enquiryjson = json_encode($data->enquiry);
@@ -146,18 +172,29 @@ class index_page implements renderable, named_templatable {
      */
     private function export_course_view(stdClass $data): void {
         $selected = $this->courseid !== '' ? feed::course($this->courseid) : null;
-        if ($selected && $this->view === 'workshop' && ($selected['id'] ?? '') === 'business-math') {
-            $data->hasworkshop = true;
-            $data->workshop = [
-                'title' => $selected['title'] ?? '',
-                'backurl' => (new moodle_url('/local/campusupdates/index.php', [
-                    'section' => 'course',
-                    'course' => 'business-math',
-                ]))->out(false),
-                'backlabel' => get_string('backtocourse', 'local_campusupdates'),
-                'samplejson' => json_encode(feed::workshop_sample(), JSON_UNESCAPED_UNICODE),
-            ];
-            return;
+        if ($selected && $this->view === 'workshop') {
+            $chapter = $this->chapter !== ''
+                ? feed::chapter($selected, $this->chapter)
+                : feed::first_ready_chapter($selected);
+            $topic = $chapter ? feed::topic($chapter, $this->topic) : null;
+            if ($chapter && $topic && !empty($chapter['ready'])) {
+                $data->hasworkshop = true;
+                $data->workshop = $this->export_workshop($selected, $chapter, $topic);
+                return;
+            }
+            if ($chapter) {
+                $data->haschapter = true;
+                $data->chapter = $this->export_chapter($selected, $chapter);
+                return;
+            }
+        }
+        if ($selected && $this->chapter !== '') {
+            $chapter = feed::chapter($selected, $this->chapter);
+            if ($chapter) {
+                $data->haschapter = true;
+                $data->chapter = $this->export_chapter($selected, $chapter);
+                return;
+            }
         }
         if ($selected) {
             $data->hascoursedetail = true;
@@ -171,6 +208,108 @@ class index_page implements renderable, named_templatable {
         }
         $data->hascourselist = !empty($list);
         $data->courselist = $list;
+    }
+
+    /**
+     * Chapter picker: topics plus simple / advanced.
+     *
+     * @param array $course
+     * @param array $chapter
+     * @return array
+     */
+    private function export_chapter(array $course, array $chapter): array {
+        $courseid = $course['id'] ?? '';
+        $topics = [];
+        foreach ($chapter['topics'] ?? [] as $topic) {
+            $base = [
+                'section' => 'course',
+                'course' => $courseid,
+                'chapter' => $chapter['id'] ?? '',
+                'topic' => $topic['id'] ?? '',
+                'view' => 'workshop',
+            ];
+            $topics[] = [
+                'id' => $topic['id'] ?? '',
+                'title' => $topic['title'] ?? '',
+                'syllabus' => $topic['syllabus'] ?? '',
+                'hassyllabus' => ($topic['syllabus'] ?? '') !== '',
+                'summary' => $topic['summary'] ?? '',
+                'simpleurl' => (new moodle_url('/local/campusupdates/index.php', $base + ['mode' => 'simple']))->out(false),
+                'advancedurl' => (new moodle_url('/local/campusupdates/index.php', $base + ['mode' => 'advanced']))->out(false),
+                'modelabel' => get_string('choosemode', 'local_campusupdates'),
+                'simplelabel' => get_string('modesimple', 'local_campusupdates'),
+                'simplehelp' => get_string('modesimplehelp', 'local_campusupdates'),
+                'advancedlabel' => get_string('modeadvanced', 'local_campusupdates'),
+                'advancedhelp' => get_string('modeadvancedhelp', 'local_campusupdates'),
+            ];
+        }
+
+        return [
+            'id' => $chapter['id'] ?? '',
+            'title' => $chapter['title'] ?? '',
+            'subtitle' => $chapter['subtitle'] ?? '',
+            'summary' => $chapter['summary'] ?? '',
+            'ready' => !empty($chapter['ready']),
+            'hastopics' => !empty($topics),
+            'topics' => $topics,
+            'comingsoon' => get_string('chaptercomingsoon', 'local_campusupdates'),
+            'simplelabel' => get_string('modesimple', 'local_campusupdates'),
+            'simplehelp' => get_string('modesimplehelp', 'local_campusupdates'),
+            'advancedlabel' => get_string('modeadvanced', 'local_campusupdates'),
+            'advancedhelp' => get_string('modeadvancedhelp', 'local_campusupdates'),
+            'topiclabel' => get_string('choosetopic', 'local_campusupdates'),
+            'modelabel' => get_string('choosemode', 'local_campusupdates'),
+            'coursetitle' => $course['title'] ?? '',
+            'backurl' => (new moodle_url('/local/campusupdates/index.php', [
+                'section' => 'course',
+                'course' => $courseid,
+            ]))->out(false),
+            'backlabel' => get_string('backtocourse', 'local_campusupdates'),
+        ];
+    }
+
+    /**
+     * Hands-on workshop for one chapter topic.
+     *
+     * @param array $course
+     * @param array $chapter
+     * @param array $topic
+     * @return array
+     */
+    private function export_workshop(array $course, array $chapter, array $topic): array {
+        $courseid = $course['id'] ?? '';
+        $chapterid = $chapter['id'] ?? '';
+        $topicid = $topic['id'] ?? '';
+        $issimple = $this->mode !== 'advanced';
+        $base = [
+            'section' => 'course',
+            'course' => $courseid,
+            'chapter' => $chapterid,
+            'topic' => $topicid,
+            'view' => 'workshop',
+        ];
+
+        return [
+            'title' => $chapter['title'] ?? '',
+            'topictitle' => $topic['title'] ?? '',
+            'chapterid' => $chapterid,
+            'topicid' => $topicid,
+            'kind' => $topic['kind'] ?? 'multivariable',
+            'mode' => $this->mode,
+            'issimple' => $issimple,
+            'isadvanced' => !$issimple,
+            'simpleurl' => (new moodle_url('/local/campusupdates/index.php', $base + ['mode' => 'simple']))->out(false),
+            'advancedurl' => (new moodle_url('/local/campusupdates/index.php', $base + ['mode' => 'advanced']))->out(false),
+            'simplelabel' => get_string('modesimple', 'local_campusupdates'),
+            'advancedlabel' => get_string('modeadvanced', 'local_campusupdates'),
+            'backurl' => (new moodle_url('/local/campusupdates/index.php', [
+                'section' => 'course',
+                'course' => $courseid,
+                'chapter' => $chapterid,
+            ]))->out(false),
+            'backlabel' => get_string('backtochapter', 'local_campusupdates'),
+            'samplejson' => json_encode(feed::workshop_sample(), JSON_UNESCAPED_UNICODE),
+        ];
     }
 
     /**
@@ -229,6 +368,30 @@ class index_page implements renderable, named_templatable {
             }
         }
 
+        $chapters = [];
+        foreach (feed::chapters($course) as $chapter) {
+            $ready = !empty($chapter['ready']);
+            $chapters[] = [
+                'id' => $chapter['id'] ?? '',
+                'title' => $chapter['title'] ?? '',
+                'subtitle' => $chapter['subtitle'] ?? '',
+                'summary' => $chapter['summary'] ?? '',
+                'ready' => $ready,
+                'comingsoon' => !$ready,
+                'openlabel' => $ready
+                    ? get_string('openchapter', 'local_campusupdates')
+                    : get_string('chaptercomingsoon', 'local_campusupdates'),
+                'url' => $ready
+                    ? (new moodle_url('/local/campusupdates/index.php', [
+                        'section' => 'course',
+                        'course' => $id,
+                        'chapter' => $chapter['id'] ?? '',
+                    ]))->out(false)
+                    : '',
+            ];
+        }
+        $firstready = feed::first_ready_chapter($course);
+
         return [
             'id' => $id,
             'title' => $course['title'] ?? '',
@@ -242,12 +405,21 @@ class index_page implements renderable, named_templatable {
             'hassteps' => !empty($steps),
             'steps' => $steps,
             'hasplayground' => false,
+            'haschapters' => !empty($chapters),
+            'chapters' => $chapters,
+            'chapterslabel' => get_string('chaptersheading', 'local_campusupdates'),
             'hasworkshopmodule' => $id === 'business-math',
-            'workshopurl' => (new moodle_url('/local/campusupdates/index.php', [
-                'section' => 'course',
-                'course' => $id,
-                'view' => 'workshop',
-            ]))->out(false),
+            'workshopurl' => $firstready
+                ? (new moodle_url('/local/campusupdates/index.php', [
+                    'section' => 'course',
+                    'course' => $id,
+                    'chapter' => $firstready['id'] ?? '',
+                ]))->out(false)
+                : (new moodle_url('/local/campusupdates/index.php', [
+                    'section' => 'course',
+                    'course' => $id,
+                    'view' => 'workshop',
+                ]))->out(false),
             'backurl' => (new moodle_url('/local/campusupdates/index.php', ['section' => 'course']))->out(false),
             'backlabel' => get_string('backtocourses', 'local_campusupdates'),
             'enquirylabel' => get_string('relatedenquiry', 'local_campusupdates'),

@@ -17,200 +17,252 @@
 {{!
     @template local_campusupdates/workshop
 
-    Four-screen profit landscape workshop.
+    Simple: original four-screen bakery lab in words.
+    Advanced: model → function → comparison → derivative, with substitutions.
 }}
-<div class="cu-ws" id="cu-workshop" data-back="{{backurl}}">
+<div class="cu-ws" id="cu-workshop" data-back="{{backurl}}" data-mode="{{mode}}" data-kind="{{kind}}">
     <p class="local-campusupdates__back">
         <a href="{{backurl}}">← {{backlabel}}</a>
     </p>
     <header class="cu-ws__head">
         <div>
-            <p class="cu-ws__kicker">Workshop</p>
-            <h2>{{title}}</h2>
-            <p class="cu-ws__lead">Enter a few numbers about a shop. Profit becomes a hill. You walk uphill to the mix that makes the most money.</p>
+            <p class="cu-ws__kicker">{{title}} · practice</p>
+            {{#issimple}}
+                <h2>Two products, one hill</h2>
+            {{/issimple}}
+            {{#isadvanced}}
+                <h2>Two products, one function</h2>
+            {{/isadvanced}}
+            <p class="cu-ws__round" id="ws-round">Round 1 of 5</p>
         </div>
-        <div class="cu-ws__profit" id="ws-profit-chip" aria-live="polite">Profit today · ₹0</div>
+        <div class="cu-ws__head-side">
+            <div class="cu-ws__mode" role="group" aria-label="How to play">
+                <a class="cu-ws__mode-btn{{#issimple}} is-on{{/issimple}}" href="{{simpleurl}}">{{simplelabel}}</a>
+                <a class="cu-ws__mode-btn{{#isadvanced}} is-on{{/isadvanced}}" href="{{advancedurl}}">{{advancedlabel}}</a>
+            </div>
+            <div class="cu-ws__profit" id="ws-profit-chip" aria-live="polite">Profit · ₹0</div>
+        </div>
     </header>
-
-    <nav class="cu-ws__steps" aria-label="Workshop screens">
-        <button type="button" class="is-on" data-ws-screen="a">1 · Enter the business<span>table → picture</span></button>
-        <button type="button" data-ws-screen="b">2 · Hold one still<span>see one slope</span></button>
-        <button type="button" data-ws-screen="c">3 · Walk uphill<span>sliders + solve</span></button>
-        <button type="button" data-ws-screen="d">4 · Take the answer<span>report + export</span></button>
-    </nav>
+    <p class="cu-ws__toast" id="ws-toast" hidden></p>
 
     <p class="cu-ws__warn" id="ws-warn" hidden></p>
 
+    {{#issimple}}
+    <nav class="cu-ws__steps" aria-label="Rounds">
+        <button type="button" class="is-on" data-ws-screen="a">1<span>Hill</span></button>
+        <button type="button" data-ws-screen="b" disabled>2<span>Slope</span></button>
+        <button type="button" data-ws-screen="c" disabled>3<span>Walk</span></button>
+        <button type="button" data-ws-screen="d" disabled>4<span>Result</span></button>
+        <button type="button" data-ws-screen="make" disabled>5<span>Your Q</span></button>
+    </nav>
+
     <section class="cu-ws__screen is-on" data-screen="a">
-        <p class="cu-ws__hint">Type the shop’s numbers. The picture is profit — the dark pin is where the shop is today, sitting below the top of the hill.</p>
+        <p class="cu-ws__mission">The dark pin is today. The top of the hill is the best mix. One profit, two products.</p>
         <div class="cu-ws__toolbar">
             <span id="ws-model-name">Bakery — March actuals</span>
-            <button type="button" class="btn btn-primary btn-sm" id="ws-plot">Plot</button>
-            <button type="button" class="btn btn-secondary btn-sm" id="ws-reset-a">Reset</button>
-            <button type="button" class="btn btn-secondary btn-sm" id="ws-sample">Load sample</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="ws-reset-a">Reset bakery</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="ws-sample">Reload bakery</button>
         </div>
         <div class="cu-ws__split">
-            <form class="cu-ws__form" id="ws-form" autocomplete="off">
-                <fieldset>
-                    <legend>Puffs</legend>
-                    <label>Starting price
-                        <input name="price1" type="number" step="0.01" required>
-                        <span>Price if you sold almost none</span>
-                    </label>
-                    <label>Price drop per unit
-                        <input name="priceDrop1" type="number" step="0.001" required>
-                        <span>How much you must discount to sell one more</span>
-                    </label>
-                    <label>Cost per unit
-                        <input name="cost1" type="number" step="0.01" required>
-                        <span>What it costs you to make one</span>
-                    </label>
-                </fieldset>
-                <fieldset>
-                    <legend>Teas</legend>
-                    <label>Starting price
-                        <input name="price2" type="number" step="0.01" required>
-                        <span>Price if you sold almost none</span>
-                    </label>
-                    <label>Price drop per unit
-                        <input name="priceDrop2" type="number" step="0.001" required>
-                        <span>How much you must discount to sell one more</span>
-                    </label>
-                    <label>Cost per unit
-                        <input name="cost2" type="number" step="0.01" required>
-                        <span>What it costs you to make one</span>
-                    </label>
-                </fieldset>
-                <fieldset>
-                    <legend>The shop</legend>
-                    <label>Congestion cost
-                        <input name="congestion" type="number" step="0.001" required>
-                        <span>Extra cost when both are busy — shared oven, counter, staff</span>
-                    </label>
-                    <label>Fixed cost per day
-                        <input name="fixedCost" type="number" step="1" required>
-                        <span>Rent, power, salaries</span>
-                    </label>
-                    <label>What we sell today — puffs
-                        <input name="currentX" type="number" step="1" required>
-                        <span>What the shop actually sells today</span>
-                    </label>
-                    <label>What we sell today — teas
-                        <input name="currentY" type="number" step="1" required>
-                        <span>What the shop actually sells today</span>
-                    </label>
-                </fieldset>
-            </form>
+            <div>
+                <details class="cu-ws__shop" id="ws-shop-details">
+                    <summary>Change shop numbers</summary>
+                    {{> local_campusupdates/workshop_form }}
+                    <button type="button" class="btn btn-primary btn-sm" id="ws-plot">Update picture</button>
+                </details>
+            </div>
             <div class="cu-ws__plot-col">
                 <canvas id="ws-canvas-a" width="640" height="360" aria-label="Profit landscape"></canvas>
                 <div class="cu-ws__plot-tools">
                     <button type="button" class="btn btn-sm btn-outline-secondary" id="ws-toggle-view">Show map from above</button>
                     <p class="cu-ws__here" id="ws-here-a">You are here — 0 puffs, 0 teas</p>
-                    <p class="cu-ws__legend"><span class="cu-ws__swatch cu-ws__swatch--you"></span> You are here <span class="cu-ws__swatch cu-ws__swatch--peak"></span> Top of the hill</p>
+                    <p class="cu-ws__legend"><span class="cu-ws__swatch cu-ws__swatch--you"></span> You <span class="cu-ws__swatch cu-ws__swatch--peak"></span> Top</p>
                 </div>
             </div>
         </div>
+        <details class="cu-ws__eq" id="ws-eq">
+            <summary>How profit is worked out</summary>
+            <div id="ws-eq-simple"></div>
+        </details>
         <div class="cu-ws__next">
-            <button type="button" class="btn btn-primary" data-ws-screen="b">Next · Hold one still</button>
+            <button type="button" class="btn btn-primary" id="ws-next-a" data-ws-screen="b" disabled>Next · Read one slope</button>
         </div>
     </section>
 
     <section class="cu-ws__screen" data-screen="b">
-        <p class="cu-ws__hint" id="ws-hint-b">Hold teas still. Only puffs can move. The two pictures are the same slice — hill on the left, ordinary curve on the right. The tilted line is the slope, in rupees.</p>
-        <div class="cu-ws__toolbar">
-            <span id="ws-freeze-label">Freeze an input · teas = 150 · puffs = free</span>
-            <button type="button" class="btn btn-secondary btn-sm" id="ws-swap">Swap</button>
-        </div>
-        <div class="cu-ws__split cu-ws__split--b">
-            <div>
-                <p class="cu-ws__caption">The hill, sliced</p>
-                <canvas id="ws-canvas-b3d" width="640" height="320" aria-label="Landscape with a slice through it"></canvas>
-                <label class="cu-ws__slider-label">
-                    <span id="ws-freeze-slider-name">Teas — held still</span>
-                    <input type="range" id="ws-freeze-slider" min="0" max="500" step="1" value="150">
-                    <span id="ws-freeze-value">150 teas</span>
-                </label>
+        <p class="cu-ws__mission">Hold one product still. Read the other slope in rupees. That is two variables: one direction at a time.</p>
+        {{> local_campusupdates/workshop_slice }}
+        <div class="cu-ws__checkq" id="ws-b-check">
+            <p id="ws-b-check-q">At today’s mix, if you sell one extra puff and keep teas the same, profit…</p>
+            <div class="cu-ws__checkq-btns">
+                <button type="button" data-ans="up">goes up</button>
+                <button type="button" data-ans="down">goes down</button>
+                <button type="button" data-ans="flat">stays the same</button>
             </div>
-            <div>
-                <p class="cu-ws__caption">That slice as a simple curve</p>
-                <canvas id="ws-canvas-b2d" width="640" height="320" aria-label="Profit curve"></canvas>
-                <label class="cu-ws__slider-label">
-                    <span id="ws-free-slider-name">Puffs — can move</span>
-                    <input type="range" id="ws-free-slider" min="0" max="400" step="1" value="200">
-                    <span id="ws-free-value">200 puffs</span>
-                </label>
-            </div>
+            <p class="cu-ws__check" id="ws-b-check-status">Tap an answer to unlock the walk.</p>
         </div>
-        <p class="cu-ws__slope" id="ws-slope-b">Slope here — each extra puff loses you ₹4.00.</p>
         <div class="cu-ws__next">
-            <button type="button" class="btn btn-primary" data-ws-screen="c">Next · Walk uphill</button>
+            <button type="button" class="btn btn-primary" id="ws-next-b" data-ws-screen="c" disabled>Next · Walk the hill</button>
         </div>
     </section>
 
     <section class="cu-ws__screen" data-screen="c">
-        <p class="cu-ws__hint">Now both products can move. Drag the sliders and watch profit. The green arrow points uphill and shrinks as you near the top. Solve jumps there for you.</p>
-        <div class="cu-ws__toolbar">
-            <span>Optimise</span>
-            <button type="button" class="btn btn-primary btn-sm" id="ws-solve">Solve</button>
-            <button type="button" class="btn btn-secondary btn-sm" id="ws-arrow">Hide uphill arrow</button>
-            <button type="button" class="btn btn-secondary btn-sm" id="ws-reset-c">Reset to actuals</button>
-        </div>
-        <div class="cu-ws__split cu-ws__split--c">
-            <div>
-                <p class="cu-ws__caption">Map from above — same-profit rings. Darker is more money.</p>
-                <canvas id="ws-canvas-c" width="640" height="400" aria-label="Map of the profit hill from above"></canvas>
-                <p class="cu-ws__legend"><span class="cu-ws__swatch cu-ws__swatch--you"></span> You are here <span class="cu-ws__swatch cu-ws__swatch--peak"></span> Top of the hill <span class="cu-ws__swatch cu-ws__swatch--up"></span> Uphill</p>
-            </div>
-            <div class="cu-ws__levers">
-                <label>Puffs per day
-                    <input type="range" id="ws-slider-x" min="0" max="400" step="1" value="200">
-                    <span id="ws-slider-x-val">200</span>
-                </label>
-                <label>Teas per day
-                    <input type="range" id="ws-slider-y" min="0" max="500" step="1" value="150">
-                    <span id="ws-slider-y-val">150</span>
-                </label>
-                <p class="cu-ws__pair" id="ws-solve-pair" hidden></p>
-                <p class="cu-ws__slope cu-ws__slope--sm" id="ws-slope-c"></p>
-            </div>
-        </div>
+        <p class="cu-ws__mission">Drag both sliders. Watch profit. The green arrow points uphill. Jump to the top only after you have walked.</p>
+        {{> local_campusupdates/workshop_walk }}
         <div class="cu-ws__next">
-            <button type="button" class="btn btn-primary" data-ws-screen="d">Next · Take the answer</button>
+            <button type="button" class="btn btn-primary" id="ws-next-c" data-ws-screen="d" disabled>Next · Take the answer</button>
         </div>
     </section>
 
     <section class="cu-ws__screen" data-screen="d" id="ws-report">
-        <p class="cu-ws__hint">This is the page you keep. One sentence for the shop, then the numbers behind it.</p>
-        <div class="cu-ws__toolbar">
-            <span>Report</span>
-            <button type="button" class="btn btn-primary btn-sm" id="ws-export">Export PDF</button>
-            <button type="button" class="btn btn-secondary btn-sm" id="ws-share">Share</button>
-        </div>
-        <p class="cu-ws__reco" id="ws-reco"></p>
-        <div class="cu-ws__cards">
-            <article>
-                <h3>Best combination</h3>
-                <p id="ws-best"></p>
-            </article>
-            <article>
-                <h3>Value of one more unit</h3>
-                <p id="ws-unit-value"></p>
-                <p class="cu-ws__card-note">At today’s sales, not at the top.</p>
-            </article>
-            <article>
-                <h3>Cost of being off</h3>
-                <p id="ws-off"></p>
-            </article>
-            <article>
-                <h3>Break-even ring</h3>
-                <p>The dark ring on the map below — profit is zero on that line. Inside it the shop makes money.</p>
-            </article>
-        </div>
-        <canvas id="ws-canvas-d" width="640" height="280" aria-label="Break-even ring"></canvas>
-        <details class="cu-ws__working" id="ws-working-wrap">
-            <summary>Working shown</summary>
-            <pre id="ws-working"></pre>
-        </details>
+        {{> local_campusupdates/workshop_report }}
     </section>
+    {{> local_campusupdates/workshop_make }}
+    {{/issimple}}
+
+    {{#isadvanced}}
+    <nav class="cu-ws__steps" aria-label="Rounds">
+        <button type="button" class="is-on" data-ws-screen="model">1<span>Equation</span></button>
+        <button type="button" data-ws-screen="function" disabled>2<span>Letters</span></button>
+        <button type="button" data-ws-screen="compare" disabled>3<span>The top</span></button>
+        <button type="button" data-ws-screen="tools" disabled>4<span>Partials</span></button>
+        <button type="button" data-ws-screen="make" disabled>5<span>Your Q</span></button>
+    </nav>
+
+    <section class="cu-ws__screen is-on" data-screen="model">
+        <p class="cu-ws__mission">Same bakery. Write P(x, y), put the shop numbers in each letter, then pick today’s value.</p>
+        <div class="cu-ws__toolbar">
+            <span id="ws-model-name">Bakery — March actuals</span>
+            <button type="button" class="btn btn-secondary btn-sm" id="ws-reset-a">Reset bakery</button>
+            <button type="button" class="btn btn-secondary btn-sm" id="ws-sample">Reload bakery</button>
+        </div>
+        <div class="cu-ws__split">
+            <div>
+                <details class="cu-ws__shop" id="ws-shop-details">
+                    <summary>Change shop numbers</summary>
+                    {{> local_campusupdates/workshop_form }}
+                    <button type="button" class="btn btn-primary btn-sm" id="ws-plot">Update picture</button>
+                </details>
+            </div>
+            <div class="cu-ws__plot-col">
+                <canvas id="ws-canvas-a" width="640" height="360" aria-label="Profit landscape"></canvas>
+                <div class="cu-ws__plot-tools">
+                    <button type="button" class="btn btn-sm btn-outline-secondary" id="ws-toggle-view">Show map from above</button>
+                    <p class="cu-ws__here" id="ws-here-a">You are here — 0 puffs, 0 teas</p>
+                    <p class="cu-ws__legend"><span class="cu-ws__swatch cu-ws__swatch--you"></span> Today</p>
+                </div>
+            </div>
+        </div>
+        <div class="cu-ws__eq" id="ws-eq">
+            <p class="cu-ws__eq-main" id="ws-eq-main"></p>
+            <div class="cu-ws__eq-table-wrap" id="ws-eq-map"></div>
+            <p class="cu-ws__eq-sub" id="ws-eq-sub"></p>
+            <p class="cu-ws__eq-plug" id="ws-eq-plug"></p>
+        </div>
+        <div class="cu-ws__checkq" id="ws-p-check">
+            <p id="ws-p-check-q">Using that substitution, today’s P(x, y) is</p>
+            <div class="cu-ws__checkq-btns" id="ws-p-check-btns"></div>
+            <p class="cu-ws__check" id="ws-p-check-status">Pick the value that matches the last line.</p>
+        </div>
+        <div class="cu-ws__next">
+            <button type="button" class="btn btn-primary" id="ws-next-model" data-ws-screen="function" disabled>Next · Match the letters</button>
+        </div>
+    </section>
+
+    <section class="cu-ws__screen" data-screen="function">
+        <p class="cu-ws__mission">Match x, y and P to the shop. Then read highest and lowest off the graph.</p>
+        <div class="cu-ws__map-quiz" id="ws-map-quiz">
+            <p class="cu-ws__caption">What each letter stands for in the shop</p>
+            <div class="cu-ws__map-row" data-map="x">
+                <span><strong>x</strong> is</span>
+                <button type="button" data-slot="p1" data-choice="puffs">how many we sell of product 1</button>
+                <button type="button" data-slot="p2" data-choice="teas">how many we sell of product 2</button>
+                <button type="button" data-slot="profit" data-choice="profit">today’s profit</button>
+            </div>
+            <div class="cu-ws__map-row" data-map="y">
+                <span><strong>y</strong> is</span>
+                <button type="button" data-slot="p1" data-choice="puffs">how many we sell of product 1</button>
+                <button type="button" data-slot="p2" data-choice="teas">how many we sell of product 2</button>
+                <button type="button" data-slot="profit" data-choice="profit">today’s profit</button>
+            </div>
+            <div class="cu-ws__map-row" data-map="z">
+                <span><strong>P(x, y)</strong> is</span>
+                <button type="button" data-slot="p1" data-choice="puffs">how many we sell of product 1</button>
+                <button type="button" data-slot="p2" data-choice="teas">how many we sell of product 2</button>
+                <button type="button" data-slot="profit" data-choice="profit">the shop’s profit</button>
+            </div>
+            <p class="cu-ws__map-status" id="ws-map-status">Match all three before you go on.</p>
+        </div>
+        <div class="cu-ws__split">
+            <div>
+                <p class="cu-ws__caption">Graph of the equation from section 1</p>
+                <canvas id="ws-canvas-fn" width="640" height="360" aria-label="Graph of the profit function"></canvas>
+                <button type="button" class="btn btn-sm btn-outline-secondary" id="ws-toggle-fn">Show map from above</button>
+            </div>
+            <div class="cu-ws__extremes" id="ws-extremes">
+                <article>
+                    <h3>Highest on this picture</h3>
+                    <p id="ws-sup">—</p>
+                </article>
+                <article>
+                    <h3>Lowest on this picture</h3>
+                    <p id="ws-inf">—</p>
+                </article>
+                <p id="ws-fn-formula"></p>
+            </div>
+        </div>
+        <div class="cu-ws__next">
+            <button type="button" class="btn btn-primary" id="ws-next-function" data-ws-screen="compare" disabled>Next · Compare</button>
+        </div>
+    </section>
+
+    <section class="cu-ws__screen" data-screen="compare">
+        <p class="cu-ws__mission">Drag toward higher profit. Close is enough. Mark when you think you are at the top.</p>
+        <div class="cu-ws__compare">
+            <article class="cu-ws__biz" id="ws-biz">
+                <h3>The business</h3>
+                <p id="ws-biz-copy"></p>
+            </article>
+            <div>
+                <p class="cu-ws__caption">The function — move your mark toward the highest profit</p>
+                <canvas id="ws-canvas-compare" width="640" height="400" aria-label="Find the maximum-profit mix"></canvas>
+                <p class="cu-ws__legend"><span class="cu-ws__swatch cu-ws__swatch--you"></span> Today’s sales <span class="cu-ws__swatch cu-ws__swatch--guess"></span> Your mark <span class="cu-ws__swatch cu-ws__swatch--peak"></span> Top (after you mark it)</p>
+            </div>
+        </div>
+        <div class="cu-ws__levers cu-ws__levers--mark">
+            <label><span id="ws-mark-x-name">Puffs</span>
+                <input type="range" id="ws-mark-x" min="0" max="400" step="1" value="200">
+                <span id="ws-mark-x-val">200</span>
+            </label>
+            <label><span id="ws-mark-y-name">Teas</span>
+                <input type="range" id="ws-mark-y" min="0" max="500" step="1" value="150">
+                <span id="ws-mark-y-val">150</span>
+            </label>
+            <p class="cu-ws__pair" id="ws-mark-profit">Profit at your mark · ₹0</p>
+            <button type="button" class="btn btn-primary" id="ws-mark-top">Mark this as the top</button>
+        </div>
+        <p class="cu-ws__check" id="ws-check-status">Move toward higher profit, then mark. Close is enough — no zoom needed.</p>
+        <div class="cu-ws__next">
+            <button type="button" class="btn btn-primary" id="ws-next-compare" data-ws-screen="tools" disabled>Next · The derivative</button>
+        </div>
+    </section>
+
+    <section class="cu-ws__screen" data-screen="tools">
+        <p class="cu-ws__mission">The slope you just used is a partial derivative. Both are zero at the top.</p>
+        <div class="cu-ws__reveal" id="ws-reveal">
+            <div id="ws-reveal-adv"></div>
+        </div>
+        <details class="cu-ws__practice" open>
+            <summary>Feel it on the hill</summary>
+            {{> local_campusupdates/workshop_slice }}
+            {{> local_campusupdates/workshop_walk }}
+        </details>
+        <div class="cu-ws__report" id="ws-report">
+            {{> local_campusupdates/workshop_report }}
+        </div>
+    </section>
+    {{> local_campusupdates/workshop_make }}
+    {{/isadvanced}}
+
     <script type="application/json" id="ws-sample-json">{{{samplejson}}}</script>
 </div>

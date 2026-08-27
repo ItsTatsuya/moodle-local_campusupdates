@@ -1,6 +1,6 @@
 {
   "source": "json",
-  "updated": "2026-08-15",
+  "updated": "2026-08-21",
   "courses": [
     {
       "id": "ai-business",
@@ -50,17 +50,43 @@
       "title": "Business Mathematics for Management Students",
       "tag": "Quantitative",
       "level": "Undergraduate / first-year MBA",
-      "duration": "Workshop — find the most profitable mix",
-      "summary": "A shop sells puffs and teas. The workshop turns seven business numbers into a profit landscape, then lets you walk uphill to the best mix.",
-      "description": "This demonstration course is for students who will sit in pricing, operations, or finance meetings and need to follow the arithmetic.\n\nThe video is a public lecture used as a stand-in. The Workshop button opens a four-screen lab: enter the business, hold one product still to read the slope, walk both sliders uphill, then take a one-page recommendation away.\n\nRelated enquiry is for questions about the course. Workshop is the hands-on module.",
+      "duration": "One workshop per chapter",
+      "summary": "Each chapter has its own hands-on workshop. The first one is multivariable profit — a bakery that sells puffs and teas.",
+      "description": "This demonstration course is for students who will sit in pricing, operations, or finance meetings and need to follow the arithmetic.\n\nThe video is a public lecture used as a stand-in. Each chapter has a short hands-on lab. Play it in shop words, or with the maths — same bakery either way.\n\nRelated enquiry is for questions about the course.",
       "youtubeid": "9nFYVS4HM5A",
       "youtubetitle": "Breakeven analysis — Business Mathematics",
-      "mode": "playground",
+      "mode": "chapters",
       "steps": [],
       "workshop": {
-        "title": "Workshop: find the most profitable mix",
-        "body": "Four screens. Enter a few numbers about a shop, see profit as a landscape, hold one product still to read the slope in rupees, walk both sliders uphill, then take a one-page recommendation away.\n\nLoad the bakery sample to present in under a minute. Nothing is saved on this demonstration site."
-      }
+        "title": "Chapter workshops",
+        "body": "Each chapter has its own self-contained workshop. Start with multivariable functions. Linear programming comes later."
+      },
+      "chapters": [
+        {
+          "id": "multivariable",
+          "title": "Multivariable functions",
+          "subtitle": "Derivatives and maximisation / minimisation",
+          "summary": "Run a two-product shop. See profit as a hill, read one slope at a time, and find the mix at the top.",
+          "ready": true,
+          "topics": [
+            {
+              "id": "profit-max",
+              "kind": "multivariable",
+              "title": "Two products, one profit hill",
+              "syllabus": "A business model that uses the derivative and minimisation/maximisation tools for a multivariable function.",
+              "summary": "A bakery sells puffs and teas. Shop words for everyone. Extra algebra if you want it."
+            }
+          ]
+        },
+        {
+          "id": "lpp",
+          "title": "Linear programming",
+          "subtitle": "Coming next",
+          "summary": "A later chapter workshop. It will be self-contained — this multivariable lab will not stand in for it.",
+          "ready": false,
+          "topics": []
+        }
+      ]
     }
   ]
 }

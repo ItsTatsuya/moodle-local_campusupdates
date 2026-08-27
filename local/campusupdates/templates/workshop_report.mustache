@@ -1,0 +1,49 @@
+{{!
+    @template local_campusupdates/workshop_report
+    One-page takeaway.
+}}
+<div class="cu-ws__toolbar">
+    <span>Your mix</span>
+    <button type="button" class="btn btn-primary btn-sm" id="ws-export">Print</button>
+    <button type="button" class="btn btn-secondary btn-sm" id="ws-share">Copy</button>
+</div>
+<p class="cu-ws__reco" id="ws-reco"></p>
+<div class="cu-ws__cards">
+    <article>
+        <h3>Best combination</h3>
+        <p id="ws-best"></p>
+    </article>
+    <article>
+        <h3>Value of one more unit</h3>
+        <p id="ws-unit-value"></p>
+        <p class="cu-ws__card-note">At today’s sales, not at the top.</p>
+    </article>
+    <article>
+        <h3>Cost of being off</h3>
+        <p id="ws-off"></p>
+    </article>
+    <article>
+        <h3>Break-even ring</h3>
+        <p>The dark ring on the map below — profit is zero on that line. Inside it the shop makes money.</p>
+    </article>
+</div>
+<canvas id="ws-canvas-d" width="640" height="280" aria-label="Break-even ring"></canvas>
+<div class="cu-ws__learn" id="ws-learn">
+    <h3>You can now</h3>
+    <ol>
+        <li>See profit as <strong>two choices, one picture</strong>.</li>
+        <li>Read a slope by <strong>holding one product still</strong>.</li>
+        <li>Find the mix where <strong>both slopes go quiet</strong>.</li>
+    </ol>
+    <details>
+        <summary>In the maths book this is…</summary>
+        <p>Function of two variables. Partial derivative. Maximum. Shop words first; “With the maths” writes the names on the same bakery.</p>
+    </details>
+</div>
+<details class="cu-ws__working" id="ws-working-wrap">
+    <summary>Working shown</summary>
+    <pre id="ws-working"></pre>
+</details>
+<div class="cu-ws__next">
+    <button type="button" class="btn btn-primary" id="ws-next-make" data-ws-screen="make" disabled>Next · Make your own question</button>
+</div>

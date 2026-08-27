@@ -68,6 +68,28 @@
         {{/workshopparagraphs}}
     </div>
 
+    {{#haschapters}}
+        <section class="cu-chapters" aria-label="{{chapterslabel}}">
+            <h3>{{chapterslabel}}</h3>
+            <p class="local-campusupdates__note">Each chapter has its own hands-on lab. Play one, then the next — they do not replace each other.</p>
+            <ul class="cu-chapters__list">
+                {{#chapters}}
+                    <li class="cu-chapter-card{{#comingsoon}} is-soon{{/comingsoon}}">
+                        <p class="cu-chapter-card__kicker">{{subtitle}}</p>
+                        <h4>{{title}}</h4>
+                        <p>{{summary}}</p>
+                        {{#ready}}
+                            <a class="btn btn-outline-primary" href="{{url}}">{{openlabel}}</a>
+                        {{/ready}}
+                        {{#comingsoon}}
+                            <span class="cu-chapter-card__soon">{{openlabel}}</span>
+                        {{/comingsoon}}
+                    </li>
+                {{/chapters}}
+            </ul>
+        </section>
+    {{/haschapters}}
+
     {{#hassteps}}
         <section class="local-campusupdates__steps" aria-label="{{stepslabel}}">
             <h3>{{stepslabel}}</h3>

@@ -1,0 +1,55 @@
+{{!
+    @template local_campusupdates/workshop_form
+    Bakery input table.
+}}
+<form class="cu-ws__form" id="ws-form" autocomplete="off">
+    <fieldset>
+        <legend id="ws-leg-1">Puffs</legend>
+        <label>Starting price
+            <input name="price1" type="number" step="0.01" required>
+            <span>Price if you sold almost none</span>
+        </label>
+        <label>Price drop per unit
+            <input name="priceDrop1" type="number" step="0.001" required>
+            <span>How much you must discount to sell one more</span>
+        </label>
+        <label>Cost per unit
+            <input name="cost1" type="number" step="0.01" required>
+            <span>What it costs you to make one</span>
+        </label>
+    </fieldset>
+    <fieldset>
+        <legend id="ws-leg-2">Teas</legend>
+        <label>Starting price
+            <input name="price2" type="number" step="0.01" required>
+            <span>Price if you sold almost none</span>
+        </label>
+        <label>Price drop per unit
+            <input name="priceDrop2" type="number" step="0.001" required>
+            <span>How much you must discount to sell one more</span>
+        </label>
+        <label>Cost per unit
+            <input name="cost2" type="number" step="0.01" required>
+            <span>What it costs you to make one</span>
+        </label>
+    </fieldset>
+    <fieldset>
+        <legend>The shop</legend>
+        <label>Congestion cost
+            <input name="congestion" type="number" step="0.001" required>
+            <span>Extra cost when both are busy — shared oven, counter, staff</span>
+        </label>
+        <label>Fixed cost per day
+            <input name="fixedCost" type="number" step="1" required>
+            <span>Rent, power, salaries</span>
+        </label>
+        <label><span id="ws-lab-x">What we sell today — puffs</span>
+            <input name="currentX" type="number" step="1" required>
+            <span>What the shop actually sells today</span>
+        </label>
+        <label><span id="ws-lab-y">What we sell today — teas</span>
+            <input name="currentY" type="number" step="1" required>
+            <span>What the shop actually sells today</span>
+        </label>
+    </fieldset>
+</form>

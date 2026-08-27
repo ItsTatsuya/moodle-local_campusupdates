@@ -55,6 +55,11 @@
                 {{> local_campusupdates/course_detail }}
             {{/course}}
         {{/hascoursedetail}}
+        {{#haschapter}}
+            {{#chapter}}
+                {{> local_campusupdates/chapter }}
+            {{/chapter}}
+        {{/haschapter}}
         {{#hasworkshop}}
             {{#workshop}}
                 {{> local_campusupdates/workshop }}

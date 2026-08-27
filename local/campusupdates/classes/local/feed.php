@@ -98,4 +98,62 @@ class feed {
     public static function workshop_sample(): array {
         return self::decode('workshop-sample');
     }
+
+    /**
+     * Chapters belonging to a course.
+     *
+     * @param array $course
+     * @return array
+     */
+    public static function chapters(array $course): array {
+        return $course['chapters'] ?? [];
+    }
+
+    /**
+     * One chapter by id.
+     *
+     * @param array $course
+     * @param string $chapterid
+     * @return array|null
+     */
+    public static function chapter(array $course, string $chapterid): ?array {
+        foreach (self::chapters($course) as $chapter) {
+            if (($chapter['id'] ?? '') === $chapterid) {
+                return $chapter;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * First chapter that already has a workshop.
+     *
+     * @param array $course
+     * @return array|null
+     */
+    public static function first_ready_chapter(array $course): ?array {
+        foreach (self::chapters($course) as $chapter) {
+            if (!empty($chapter['ready'])) {
+                return $chapter;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * One topic inside a chapter.
+     *
+     * @param array $chapter
+     * @param string $topicid
+     * @return array|null
+     */
+    public static function topic(array $chapter, string $topicid): ?array {
+        foreach ($chapter['topics'] ?? [] as $topic) {
+            if (($topic['id'] ?? '') === $topicid) {
+                return $topic;
+            }
+        }
+        $topics = $chapter['topics'] ?? [];
+        return $topics[0] ?? null;
+    }
 }
